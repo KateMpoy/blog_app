@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'BlogApp';
+  public title = 'My Angular App';
+  public isAuthenticated: boolean;
+
+  constructor() {
+    this.isAuthenticated = false;
+  }
+
+  login() {
+  }
+
+  logout() {
+  }
 }
