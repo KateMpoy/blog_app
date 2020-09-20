@@ -24,7 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -122,6 +123,6 @@
   },
   "defaultProject": "BlogApp",
   "cli": {
-    "analytics": "4237be7e-b5bd-4179-a38b-856b0d70dee8"
+    "analytics": "bd0f912f-a6e2-406f-9acd-4f62dbe1236e"
   }
 }

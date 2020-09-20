@@ -3,53 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { SigninComponent } from './components/signin/signin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {
-  MatToolbarModule,
-  MatMenuModule,
-  MatIconModule,
-  MatButtonModule,
-  MatTableModule,
-  MatDividerModule,
-  MatProgressSpinnerModule,
-  MatInputModule,
-  MatCardModule,
-  MatSlideToggleModule,
-  MatSelectModule,
-  MatOptionModule,
-} from '@angular/material';
-
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    SigninComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
-    AppRoutingModule,
-    FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatDividerModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatProgressSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
