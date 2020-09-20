@@ -115,6 +115,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "BlogApp"
+    }
+  },
+  "defaultProject": "BlogApp",
+  "cli": {
+    "analytics": "a906129b-a775-4bdb-9cb3-ad3afaf0ac94"
+  }
 }
