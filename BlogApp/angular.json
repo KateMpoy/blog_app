@@ -39,7 +39,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -123,6 +122,6 @@
   },
   "defaultProject": "BlogApp",
   "cli": {
-    "analytics": "1235898e-4c84-4eb1-a6d6-974552fcacf4"
+    "analytics": "4237be7e-b5bd-4179-a38b-856b0d70dee8"
   }
 }
