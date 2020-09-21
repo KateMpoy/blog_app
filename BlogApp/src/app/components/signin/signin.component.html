@@ -1,15 +1,31 @@
-<div class="auth-wrapper box" style="padding: 9vh;">
-    <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
-        <h3 class="h3 mb-3 font-weight-normal text-center">Please sign in</h3>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" required>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" formControlName="password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-block btn-primary">Sign in</button>
-        <div>Not a Member? Sign Up  <a href="/sign-up">here</a> </div>
+<div class="row m-0 w-100">
+  <div class="col-md-4 offset-4 mt-5" *ngIf="!this.isLogin">
+    <h4>Login</h4>
+    <form #myform="ngForm" (ngSubmit)="onSubmit(myform)">
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="text"
+          name="username"
+          placeholder="Username"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          placeholder="Password"
+          ngModel
+        />
+      </div>
+      <input class="btn btn-outline-info" type="submit" value="Login" />
+      <div>Not a Member? Click <a href="/sign-up">here</a></div>
     </form>
+  </div>
+  <div class="col-md-4 offset-4 mt-5" *ngIf="this.isLogin">
+    <h1>You are logged in</h1>
+    <button class="btn btn-outline-info" (click)="logout()">Log-out</button>
+  </div>
 </div>
