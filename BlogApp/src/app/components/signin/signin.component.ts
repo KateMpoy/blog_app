@@ -31,7 +31,7 @@ export class SigninComponent implements OnInit {
             JSON.stringify(res.data)
           );
           this._auth.setDataInLocalStorage('token', res.token);
-          this._router.navigate(['']);
+          this._router.navigate(['login']);
         } else {
         }
       },
@@ -47,7 +47,8 @@ export class SigninComponent implements OnInit {
     }
   }
   logout() {
+    console.log('clicked');
     this._auth.clearStorage();
-    this._router.navigate(['']);
+    this._router.navigate(['login']);
   }
 }

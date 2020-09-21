@@ -47,6 +47,7 @@ router.post("/register", async function (req, res, next) {
     res.send({ status: 0, error: error });
   }
 });
+
 router.post("/login", async function (req, res, next) {
   try {
     let { username, password } = req.body;
