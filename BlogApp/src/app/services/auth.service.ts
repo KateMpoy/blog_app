@@ -15,6 +15,12 @@ export class AuthService {
       ? JSON.parse(localStorage.getItem('blogData'))
       : null;
   }
+
+  getCategoryDetails() {
+    return localStorage.getItem('categoryData')
+      ? JSON.parse(localStorage.getItem('categoryData'))
+      : null;
+  }
   setDataInLocalStorage(variableName, data) {
     localStorage.setItem(variableName, data);
   }

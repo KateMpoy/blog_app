@@ -25,25 +25,26 @@ export class NewCategoryComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    // console.log('Your form data : ', form.value);
-    // this._api.postTypeRequest('user/addCategory', form.value).subscribe(
-    //   (res: any) => {
-    //     if (res.status) {
-    //       console.log(res);
-    //       this._auth.setDataInLocalStorage(
-    //         'userData',
-    //         JSON.stringify(res.data)
-    //       );
-    //       this._auth.setDataInLocalStorage('token', res.token);
 
-    //     } else {
-    //       console.log(res);
-    //       alert(res.msg);
-    //     }
-    //   },
-    //   (err) => {
-    //     this.errorMessage = err['error'].message;
-    //   }
-    // );
+    form.value.blogId = this.x[0].blogId
+    console.log('Category data : ', form.value);
+    this._api.postTypeRequest('user/addCategory', form.value).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this._auth.setDataInLocalStorage(
+            'categoryData',
+            JSON.stringify(res.data)
+          );
+          this._router.navigate(['categories']);
+        } else {
+          console.log(res);
+          alert(res.msg);
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
   }
 }

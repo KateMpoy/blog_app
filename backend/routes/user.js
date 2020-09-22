@@ -131,4 +131,27 @@ router.post("/getBlog", async function (req, res, next) {
   }
 });
 
+router.post("/addCategory", async function (req, res, next) {
+  try {
+    let { blogId, categoryName, description } = req.body;
+    const checkId = `Select categoryName FROM categories WHERE categoryName = ?`;
+
+    con.query(checkId, [categoryName], (err, result, fields) => {
+      if (!result.length) { 
+
+        const sql = `Insert Into categories (categoryName, catDescription, blogId) VALUES ( ?, ?, ?)`;
+        con.query(sql, [categoryName, description, blogId], (err, result, fields) => {
+          if (err) {
+            res.send({ status: 0, data: err });
+          } else {
+            let token = jwt.sign({ data: result }, "secret");
+            res.send({ status: 1, data: result, token: token });
+          }
+        });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
 module.exports = router;
