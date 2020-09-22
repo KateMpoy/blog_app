@@ -18,9 +18,7 @@ export class UserComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router
   ) {
-    let x =this._auth.getUserDetails()
-    console.log(x)
-    this.blogName = x.blogName;
+
   }
 
   ngOnInit() {
@@ -28,7 +26,6 @@ export class UserComponent implements OnInit {
   }
 
   isUserLogin() {
-    console.log(this._auth.getUserDetails());
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;
       this._router.navigate(['profile']);
