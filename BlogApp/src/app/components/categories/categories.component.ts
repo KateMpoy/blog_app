@@ -21,14 +21,6 @@ export class CategoriesComponent implements OnInit {
 
   }
 
-  isUserLogin() {
-    console.log(this._auth.getUserDetails());
-    if (this._auth.getUserDetails() != null) {
-      this.isLogin = true;
-      this._router.navigate(['profile']);
-    }
-  }
-
   logout() {
     this._auth.clearStorage();
     this._router.navigate(['login']);

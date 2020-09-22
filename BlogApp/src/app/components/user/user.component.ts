@@ -12,11 +12,16 @@ import { AuthService } from './../../services/auth.service';
 
 export class UserComponent implements OnInit {
   isLogin: boolean = false;
+  blogName: string;
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
     private _router: Router
-  ) {}
+  ) {
+    let x =this._auth.getUserDetails()
+    console.log(x)
+    this.blogName = x.blogName;
+  }
 
   ngOnInit() {
     this.isUserLogin();

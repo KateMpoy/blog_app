@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
             JSON.stringify(res.data)
           );
           this._auth.setDataInLocalStorage('token', res.token);
-          this._router.navigate(['profile']);
+          this.addBlog(form);
         } else {
           console.log(res);
           alert(res.msg);
@@ -46,6 +46,30 @@ export class SignupComponent implements OnInit {
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;
       this._router.navigate(['profile']);
+    }
+  }
+
+  addBlog(form) {
+    if (this._auth.getUserDetails() != null) {
+      this._api.postTypeRequest('user/addBlog', form.value).subscribe(
+        (res: any) => {
+          if (res.status) {
+            console.log(res);
+            this._auth.setDataInLocalStorage(
+              'userData2',
+              JSON.stringify(res.data)
+            );
+            this._auth.setDataInLocalStorage('token', res.token);
+            this._router.navigate(['profile']);
+          } else {
+            console.log(res);
+            alert(res.msg);
+          }
+        },
+        (err) => {
+          this.errorMessage = err['error'].message;
+        }
+      );
     }
   }
 }

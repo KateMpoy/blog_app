@@ -6,17 +6,17 @@ var mysql = require("mysql");
 
 var con = mysql.createConnection({
   host: "localhost",
-  port:"3306",
+  port: "3306",
   user: "root",
   password: "password",
   database: "blog",
-  insecureAuth : true
+  insecureAuth: true,
 });
 
-con.connect(function(err) {
-    if (err) throw err;
+con.connect(function (err) {
+  if (err) throw err;
 
-    console.log('Connection Successful');
+  console.log("Connection Successful");
 });
 
 router.post("/register", async function (req, res, next) {
@@ -24,9 +24,9 @@ router.post("/register", async function (req, res, next) {
     let { username, email, password } = req.body;
     const hashed_password = md5(password.toString());
     const checkUsername = `Select username FROM users WHERE username = ?`;
+    const checkId = `Select id FROM users WHERE username = ?`;
 
     con.query(checkUsername, [username], (err, result, fields) => {
-      console.log("result",result);
       if (!result.length) {
         const sql = `Insert Into users (username, email, password) VALUES ( ?, ?, ? )`;
         con.query(
@@ -59,6 +59,30 @@ router.post("/login", async function (req, res, next) {
       } else {
         let token = jwt.sign({ data: result }, "secret");
         res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/addBlog", async function (req, res, next) {
+  try {
+    let { username, email, password, blogName } = req.body;
+    const checkId = `Select id FROM users WHERE username = ?`;
+
+    con.query(checkId, [username], (err, result, fields) => {
+      if (result.length) {
+        console.log("userId", result[0].id);
+        const sql = `Insert Into blogs (blogName, userId) VALUES ( ?, ?)`;
+        con.query(sql, [blogName, result[0].id], (err, result, fields) => {
+          if (err) {
+            res.send({ status: 0, data: err });
+          } else {
+            let token = jwt.sign({ data: result }, "secret");
+            res.send({ status: 1, data: result, token: token });
+          }
+        });
       }
     });
   } catch (error) {
