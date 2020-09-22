@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
             JSON.stringify(res.data)
           );
           this._auth.setDataInLocalStorage('token', res.token);
-          this._router.navigate(['login']);
+          this._router.navigate(['profile']);
         } else {
           console.log(res);
           alert(res.msg);
@@ -45,6 +45,7 @@ export class SignupComponent implements OnInit {
   isUserLogin() {
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;
+      this._router.navigate(['profile']);
     }
   }
 }
