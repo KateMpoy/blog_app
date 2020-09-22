@@ -92,16 +92,22 @@ router.post("/addBlog", async function (req, res, next) {
 
 router.post("/getCategories", async function (req, res, next) {
   try {
-    let { username, password } = req.body;
-    const hashed_password = md5(password.toString());
-    const sql = `SELECT * FROM users WHERE username = ? AND password = ?`;
-    con.query(sql, [username, hashed_password], function (err, result, fields) {
-      if (err) {
-        res.send({ status: 0, data: err });
-      } else {
-        let token = jwt.sign({ data: result }, "secret");
-        res.send({ status: 1, data: result, token: token });
-      }
+    let { email, id, password, username } = req.body;
+    const sql = `SELECT * FROM blogs WHERE userId = ?`;
+    con.query(sql, [id], function (err, result, fields) {
+      
+      if (result.length) {
+        console.log("blogId", result[0].blogId);
+        const sql = `SELECT * FROM categories WHERE blogId = ?`;
+        con.query(sql, [result[0].blogId], function (err, result, fields) {
+          if (err) {
+            res.send({ status: 0, data: err });
+          } else {
+            let token = jwt.sign({ data: result }, "secret");
+            res.send({ status: 1, data: result, token: token });
+          }
+        });
+      } 
     });
   } catch (error) {
     res.send({ status: 0, error: error });

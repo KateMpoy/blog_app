@@ -11,6 +11,13 @@ import { AuthService } from './../../services/auth.service';
 export class CategoriesComponent implements OnInit {
 
   isLogin: boolean = false;
+  rowData;
+  errorMessage;
+
+  columnDefs = [
+    {field: 'categoryName' },
+    {field: 'catDescription' }
+];
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -19,6 +26,25 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
 
+    let x =this._auth.getUserDetails()
+    console.log("id", x)
+    this.rowData = x
+    this._api.postTypeRequest('user/getCategories', x[0]).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this._auth.setDataInLocalStorage(
+            'userData',
+            JSON.stringify(res.data)
+          );
+          this._auth.setDataInLocalStorage('token', res.token);
+        } else {
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
   }
 
   logout() {

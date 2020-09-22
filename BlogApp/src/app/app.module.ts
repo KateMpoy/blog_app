@@ -12,6 +12,7 @@ import { UserComponent } from './components/user/user.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,
+    AgGridModule.withComponents([])
   ],
   exports: [SigninComponent, SignupComponent, UserComponent],
   providers: [],
