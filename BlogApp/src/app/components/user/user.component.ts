@@ -35,4 +35,12 @@ export class UserComponent implements OnInit {
     this._router.navigate(['login']);
   }
 
+  viewCategories() {
+    this._router.navigate(['login']);
+  }
+
+  viewPosts() {
+    this._router.navigate(['login']);
+  }
+
 }

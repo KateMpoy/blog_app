@@ -9,9 +9,8 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-
 
 @NgModule({
   declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent],
@@ -24,13 +23,9 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     HttpClientModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
   ],
-  exports : [
-    SigninComponent, 
-    SignupComponent,
-    UserComponent,
-    ],
+  exports: [SigninComponent, SignupComponent, UserComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

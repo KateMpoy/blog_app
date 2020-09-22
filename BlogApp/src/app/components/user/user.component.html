@@ -1,20 +1,10 @@
 <p>
-  <mat-toolbar color="primary">
-    <button
-      mat-icon-button
-      class="example-icon"
-      style="background-color: transparent; border: none"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span style="margin-left: 1vw">Blog Dashboard</span>
+  <mat-toolbar class="app-toolbar" color="primary">
+    <span>Blog Dashboard</span>
+    <button class="btn" (click)="viewCategories()"> Categories</button>
+    <button class="btn" (click)="viewPosts()"> Posts</button>
     <span class="example-spacer"></span>
-    <button
-      mat-icon-button
-      class="example-icon"
-      (click)="logout()"
-      style="background-color: transparent; border: none"
-    >
+    <button mat-icon-button class="example-icon" (click)="logout()" style="background-color: transparent; border: none" >
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar>
