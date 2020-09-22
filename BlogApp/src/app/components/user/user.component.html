@@ -1,4 +1,21 @@
-  <div class="col-md-4 offset-4 mt-5" *ngIf="this.isLogin">
-    <h1>You are logged in</h1>
-    <button class="btn btn-outline-info" (click)="logout()">Log-out</button>
-  </div>
+<p>
+  <mat-toolbar color="primary">
+    <button
+      mat-icon-button
+      class="example-icon"
+      style="background-color: transparent; border: none"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span style="margin-left: 1vw">Blog Dashboard</span>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon"
+      (click)="logout()"
+      style="background-color: transparent; border: none"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>

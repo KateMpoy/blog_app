@@ -31,7 +31,6 @@ export class UserComponent implements OnInit {
   }
 
   logout() {
-    console.log('clicked');
     this._auth.clearStorage();
     this._router.navigate(['login']);
   }
