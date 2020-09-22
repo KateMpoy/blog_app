@@ -6,18 +6,17 @@ import { AuthService } from './../../services/auth.service';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-
   isLogin: boolean = false;
   rowData;
   errorMessage;
 
   columnDefs = [
-    {field: 'categoryName' },
-    {field: 'catDescription' }
-];
+    { headerName: 'Name', field: 'categoryName' },
+    { headerName: 'Description', field: 'catDescription' },
+  ];
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -25,20 +24,13 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    let x = this._auth.getUserDetails();
 
-    let x =this._auth.getUserDetails()
-    console.log("id", x)
-    this.rowData = x
     this._api.postTypeRequest('user/getCategories', x[0]).subscribe(
       (res: any) => {
         if (res.status) {
           console.log(res);
-          this._auth.setDataInLocalStorage(
-            'userData',
-            JSON.stringify(res.data)
-          );
-          this._auth.setDataInLocalStorage('token', res.token);
-        } else {
+          this.rowData = res.data;
         }
       },
       (err) => {
@@ -52,15 +44,14 @@ export class CategoriesComponent implements OnInit {
     this._router.navigate(['login']);
   }
 
-  viewCategories() {
+  NewCategory() {
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;
-      this._router.navigate(['categories']);
+      this._router.navigate(['newCategory']);
     }
   }
 
   viewPosts() {
     this._router.navigate(['']);
   }
-
 }

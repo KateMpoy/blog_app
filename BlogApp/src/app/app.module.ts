@@ -13,10 +13,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { NewCategoryComponent } from './components/new-category/new-category.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent],
+  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent, NewCategoryComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
