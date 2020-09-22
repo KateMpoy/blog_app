@@ -114,4 +114,21 @@ router.post("/getCategories", async function (req, res, next) {
   }
 });
 
+router.post("/getBlog", async function (req, res, next) {
+  try {
+    let { email, id, password, username } = req.body;
+    const sql = `SELECT * FROM blogs WHERE userId = ?`;
+    con.query(sql, [id], function (err, result, fields) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
 module.exports = router;

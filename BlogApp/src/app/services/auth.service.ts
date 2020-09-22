@@ -9,6 +9,12 @@ export class AuthService {
       ? JSON.parse(localStorage.getItem('userData'))
       : null;
   }
+
+  getBlogDetails() {
+    return localStorage.getItem('blogData')
+      ? JSON.parse(localStorage.getItem('blogData'))
+      : null;
+  }
   setDataInLocalStorage(variableName, data) {
     localStorage.setItem(variableName, data);
   }

@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
           if (res.status) {
             console.log(res);
             this._auth.setDataInLocalStorage(
-              'userData2',
+              'blogData',
               JSON.stringify(res.data)
             );
             this._auth.setDataInLocalStorage('token', res.token);

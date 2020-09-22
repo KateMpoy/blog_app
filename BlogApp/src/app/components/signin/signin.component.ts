@@ -12,6 +12,7 @@ import { AuthService } from './../../services/auth.service';
 export class SigninComponent implements OnInit {
   isLogin: boolean = false;
   errorMessage;
+  x;
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -26,11 +27,41 @@ export class SigninComponent implements OnInit {
       (res: any) => {
         if (res.status) {
           console.log(res);
+          this.x = res.data
           this._auth.setDataInLocalStorage(
             'userData',
             JSON.stringify(res.data)
           );
           this._auth.setDataInLocalStorage('token', res.token);
+          this.getBlog()
+        } else {
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
+   
+
+  }
+  isUserLogin() {
+    console.log(this._auth.getUserDetails());
+    if (this._auth.getUserDetails() != null) {
+      this.isLogin = true;
+      this._router.navigate(['profile']);
+    }
+  }
+
+  getBlog(){
+
+    this._api.postTypeRequest('user/getBlog', this.x[0]).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this._auth.setDataInLocalStorage(
+            'blogData',
+            JSON.stringify(res.data)
+          );
           this._router.navigate(['profile']);
         } else {
         }
@@ -39,12 +70,5 @@ export class SigninComponent implements OnInit {
         this.errorMessage = err['error'].message;
       }
     );
-  }
-  isUserLogin() {
-    console.log(this._auth.getUserDetails());
-    if (this._auth.getUserDetails() != null) {
-      this.isLogin = true;
-      this._router.navigate(['profile']);
-    }
   }
 }
