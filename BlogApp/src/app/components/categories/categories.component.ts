@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from './../../services/api.service';
 import { AuthService } from './../../services/auth.service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
+export class CategoriesComponent implements OnInit {
 
-export class UserComponent implements OnInit {
   isLogin: boolean = false;
   constructor(
     private _api: ApiService,
@@ -19,7 +18,7 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isUserLogin();
+
   }
 
   isUserLogin() {
@@ -36,11 +35,14 @@ export class UserComponent implements OnInit {
   }
 
   viewCategories() {
-    this._router.navigate(['categories']);
+    if (this._auth.getUserDetails() != null) {
+      this.isLogin = true;
+      this._router.navigate(['categories']);
+    }
   }
 
   viewPosts() {
-    this._router.navigate(['login']);
+    this._router.navigate(['']);
   }
 
 }

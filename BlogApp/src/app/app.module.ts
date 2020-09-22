@@ -11,9 +11,11 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { CategoriesComponent } from './components/categories/categories.component';
+
 
 @NgModule({
-  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent],
+  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
