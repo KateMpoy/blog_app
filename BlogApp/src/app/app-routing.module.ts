@@ -6,6 +6,7 @@ import { UserComponent } from './components/user/user.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoriesComponent },
   { path: 'newCategory', component: NewCategoryComponent },
   { path: 'posts', component: PostsComponent },
+  { path: 'newPost', component: NewPostComponent },
 ];
 
 

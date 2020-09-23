@@ -95,7 +95,6 @@ router.post("/getCategories", async function (req, res, next) {
     let { email, id, password, username } = req.body;
     const sql = `SELECT * FROM blogs WHERE userId = ?`;
     con.query(sql, [id], function (err, result, fields) {
-      
       if (result.length) {
         console.log("blogId", result[0].blogId);
         const sql = `SELECT * FROM categories WHERE blogId = ?`;
@@ -107,7 +106,7 @@ router.post("/getCategories", async function (req, res, next) {
             res.send({ status: 1, data: result, token: token });
           }
         });
-      } 
+      }
     });
   } catch (error) {
     res.send({ status: 0, error: error });
@@ -137,17 +136,20 @@ router.post("/addCategory", async function (req, res, next) {
     const checkId = `Select categoryName FROM categories WHERE categoryName = ? AND blogId = ?`;
 
     con.query(checkId, [categoryName, blogId], (err, result, fields) => {
-      if (!result.length) { 
-
+      if (!result.length) {
         const sql = `Insert Into categories (categoryName, catDescription, blogId) VALUES ( ?, ?, ?)`;
-        con.query(sql, [categoryName, description, blogId], (err, result, fields) => {
-          if (err) {
-            res.send({ status: 0, data: err });
-          } else {
-            let token = jwt.sign({ data: result }, "secret");
-            res.send({ status: 1, data: result, token: token });
+        con.query(
+          sql,
+          [categoryName, description, blogId],
+          (err, result, fields) => {
+            if (err) {
+              res.send({ status: 0, data: err });
+            } else {
+              let token = jwt.sign({ data: result }, "secret");
+              res.send({ status: 1, data: result, token: token });
+            }
           }
-        });
+        );
       }
     });
   } catch (error) {
@@ -158,7 +160,7 @@ router.post("/addCategory", async function (req, res, next) {
 router.post("/deleteCategory", async function (req, res, next) {
   try {
     let { blogId, catDescription, categoryName, categoryid } = req.body;
-    console.log("cate", req.body)
+    console.log("cate", req.body);
     const sql = `DELETE FROM categories WHERE categoryid = ?`;
     con.query(sql, [categoryid], function (err, result, fields) {
       if (err) {
@@ -176,9 +178,31 @@ router.post("/deleteCategory", async function (req, res, next) {
 router.post("/saveCategory", async function (req, res, next) {
   try {
     let { blogId, catDescription, categoryName, categoryid } = req.body;
-    console.log("cate", req.body)
+    console.log("cate", req.body);
     const sql = `UPDATE categories SET categoryName = ? , catDescription = ? WHERE categoryid = ?`;
-    con.query(sql, [categoryName,catDescription,categoryid], function (err, result, fields) {
+    con.query(sql, [categoryName, catDescription, categoryid], function (
+      err,
+      result,
+      fields
+    ) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/getPosts", async function (req, res, next) {
+  try {
+    let { email, id, password, username } = req.body;
+
+    const sql = `SELECT * FROM posts WHERE userId = ?`;
+    con.query(sql, [id], function (err, result, fields) {
       if (err) {
         res.send({ status: 0, data: err });
       } else {

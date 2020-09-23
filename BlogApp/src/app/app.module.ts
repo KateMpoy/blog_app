@@ -15,10 +15,11 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AgGridModule } from 'ag-grid-angular';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent, NewCategoryComponent, PostsComponent],
+  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent, NewCategoryComponent, PostsComponent, NewPostComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

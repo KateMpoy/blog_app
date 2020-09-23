@@ -1,1 +1,33 @@
-<p>posts works!</p>
+<p>
+    <mat-toolbar class="app-toolbar" color="primary">
+      <span>Posts</span>
+      <button class="btn2" (click)="profile()">Profile</button>
+      <button class="btn2" (click)="NewCategory()">New Post</button>
+  
+      <span class="example-spacer"></span>
+      <button
+        mat-icon-button
+        class="example-icon"
+        (click)="logout()"
+        style="background-color: transparent; border: none"
+      >
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+  </p>
+  
+  <ag-grid-angular
+    #agGrid
+    style="padding: 4vw; height: 60vh; width: 60vw; margin-left: 18vw"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [rowSelection]="'single'"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+  
+  <div style="display: flex; margin-left: 65vw">
+    <button class="btn btn-outline-info" (click)="saveRow()">Save</button
+    ><button class="btn btn-outline-info" (click)="deleteRow()">Delete</button>
+  </div>
+  
