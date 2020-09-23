@@ -15,7 +15,6 @@ var con = mysql.createConnection({
 
 con.connect(function (err) {
   if (err) throw err;
-
   console.log("Connection Successful");
 });
 
@@ -73,7 +72,6 @@ router.post("/addBlog", async function (req, res, next) {
 
     con.query(checkId, [username], (err, result, fields) => {
       if (result.length) {
-        console.log("userId", result[0].id);
         const sql = `Insert Into blogs (blogName, userId) VALUES ( ?, ?)`;
         con.query(sql, [blogName, result[0].id], (err, result, fields) => {
           if (err) {
@@ -96,7 +94,6 @@ router.post("/getCategories", async function (req, res, next) {
     const sql = `SELECT * FROM blogs WHERE userId = ?`;
     con.query(sql, [id], function (err, result, fields) {
       if (result.length) {
-        console.log("blogId", result[0].blogId);
         const sql = `SELECT * FROM categories WHERE blogId = ?`;
         con.query(sql, [result[0].blogId], function (err, result, fields) {
           if (err) {
@@ -160,7 +157,6 @@ router.post("/addCategory", async function (req, res, next) {
 router.post("/deleteCategory", async function (req, res, next) {
   try {
     let { blogId, catDescription, categoryName, categoryid } = req.body;
-    console.log("cate", req.body);
     const sql = `DELETE FROM categories WHERE categoryid = ?`;
     con.query(sql, [categoryid], function (err, result, fields) {
       if (err) {
@@ -178,7 +174,6 @@ router.post("/deleteCategory", async function (req, res, next) {
 router.post("/saveCategory", async function (req, res, next) {
   try {
     let { blogId, catDescription, categoryName, categoryid } = req.body;
-    console.log("cate", req.body);
     const sql = `UPDATE categories SET categoryName = ? , catDescription = ? WHERE categoryid = ?`;
     con.query(sql, [categoryName, catDescription, categoryid], function (
       err,

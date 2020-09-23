@@ -24,6 +24,7 @@
     "ag-grid-angular": "^24.0.0",
     "ag-grid-community": "^24.0.0",
     "bootstrap": "^4.5.2",
+    "ng-multiselect-dropdown": "^0.2.10",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

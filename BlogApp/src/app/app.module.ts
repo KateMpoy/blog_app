@@ -16,7 +16,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent, NewCategoryComponent, PostsComponent, NewPostComponent],
@@ -30,6 +30,7 @@ import { NewPostComponent } from './components/new-post/new-post.component';
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,
+    NgMultiSelectDropDownModule.forRoot(),
     AgGridModule.withComponents([])
   ],
   exports: [SigninComponent, SignupComponent, UserComponent],
