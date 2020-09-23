@@ -134,9 +134,9 @@ router.post("/getBlog", async function (req, res, next) {
 router.post("/addCategory", async function (req, res, next) {
   try {
     let { blogId, categoryName, description } = req.body;
-    const checkId = `Select categoryName FROM categories WHERE categoryName = ?`;
+    const checkId = `Select categoryName FROM categories WHERE categoryName = ? AND blogId = ?`;
 
-    con.query(checkId, [categoryName], (err, result, fields) => {
+    con.query(checkId, [categoryName, blogId], (err, result, fields) => {
       if (!result.length) { 
 
         const sql = `Insert Into categories (categoryName, catDescription, blogId) VALUES ( ?, ?, ?)`;

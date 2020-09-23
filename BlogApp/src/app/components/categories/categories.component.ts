@@ -49,6 +49,11 @@ export class CategoriesComponent implements OnInit {
     this._router.navigate(['login']);
   }
 
+  profile() {
+    
+    this._router.navigate(['profile']);
+  }
+
   NewCategory() {
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;

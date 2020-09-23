@@ -42,7 +42,7 @@ export class UserComponent implements OnInit {
   }
 
   viewPosts() {
-    this._router.navigate(['login']);
+    this._router.navigate(['posts']);
   }
 
 }
