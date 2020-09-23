@@ -5,8 +5,11 @@
   .example-icon {
     color: white;
   }
-  
   .btn {
+    margin-left: 1vw;
+  }
+  
+  .btn2 {
       background-color: transparent; 
       border: none;margin-left: 1vw;
       color: white;

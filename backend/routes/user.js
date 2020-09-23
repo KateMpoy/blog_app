@@ -154,4 +154,41 @@ router.post("/addCategory", async function (req, res, next) {
     res.send({ status: 0, error: error });
   }
 });
+
+router.post("/deleteCategory", async function (req, res, next) {
+  try {
+    let { blogId, catDescription, categoryName, categoryid } = req.body;
+    console.log("cate", req.body)
+    const sql = `DELETE FROM categories WHERE categoryid = ?`;
+    con.query(sql, [categoryid], function (err, result, fields) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/saveCategory", async function (req, res, next) {
+  try {
+    let { blogId, catDescription, categoryName, categoryid } = req.body;
+    console.log("cate", req.body)
+    const sql = `UPDATE categories SET categoryName = ? , catDescription = ? WHERE categoryid = ?`;
+    con.query(sql, [categoryName,catDescription,categoryid], function (err, result, fields) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
 module.exports = router;

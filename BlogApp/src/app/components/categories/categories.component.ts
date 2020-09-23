@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './../../services/api.service';
 import { AuthService } from './../../services/auth.service';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-categories',
@@ -9,13 +11,16 @@ import { AuthService } from './../../services/auth.service';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
+  @ViewChild('agGrid') agGrid: AgGridAngular;
   isLogin: boolean = false;
   rowData;
   errorMessage;
 
   columnDefs = [
-    { headerName: 'Name', field: 'categoryName' },
-    { headerName: 'Description', field: 'catDescription' },
+    { headerName: 'ID', field: 'categoryid' },
+    { headerName: 'Name', field: 'categoryName', editable: true },
+    { headerName: 'Description', field: 'catDescription', editable: true },
+    { checkboxSelection: true },
   ];
   constructor(
     private _api: ApiService,
@@ -51,7 +56,39 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  viewPosts() {
-    this._router.navigate(['']);
+  deleteRow() {
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map((node) => node.data);
+    console.log(selectedData);
+
+    this._api.postTypeRequest('user/deleteCategory', selectedData[0]).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this.ngOnInit()
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
+  }
+
+  saveRow() {
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map((node) => node.data);
+    console.log(selectedData);
+
+    this._api.postTypeRequest('user/saveCategory', selectedData[0]).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this.ngOnInit()
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
   }
 }
