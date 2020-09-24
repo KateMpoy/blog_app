@@ -194,15 +194,50 @@ router.post("/saveCategory", async function (req, res, next) {
 
 router.post("/getPosts", async function (req, res, next) {
   try {
-    let { email, id, password, username } = req.body;
+    let { email, blogId, password, username } = req.body;
 
-    const sql = `SELECT * FROM posts WHERE userId = ?`;
-    con.query(sql, [id], function (err, result, fields) {
+    const sql = `SELECT * FROM posts WHERE blogId = ?`;
+    con.query(sql, [blogId], function (err, result, fields) {
       if (err) {
         res.send({ status: 0, data: err });
       } else {
         let token = jwt.sign({ data: result }, "secret");
         res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/addPost", async function (req, res, next) {
+  try {
+    
+    let { body, title, selected, blogId } = req.body;
+    console.log(selected);
+    const sql = `Insert Into posts (title, body, blogId) VALUES ( ?, ?, ?)`;
+    con.query(sql, [title, body, blogId], (err, result, fields) => {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+        console.log(result.insertId);
+
+        selected.forEach((element) => {
+          const sql = `Insert Into posts_categories (postId, categoryId) VALUES ( ?, ?)`;
+          con.query(sql, [result.insertId, element.categoryid], function (
+            err,
+            result2,
+            fields
+          ) {
+            if (err) {
+              res.send({ status: 0, data: err });
+            } else {
+              console.log('success')
+            }
+          });
+        });
       }
     });
   } catch (error) {

@@ -57,17 +57,18 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    form.value.blogId = this.x[0].blogId;
-    console.log('Category data : ', form.value);
-    this._api.postTypeRequest('user/addCategory', form.value).subscribe(
+  
+    form.value.blogId = this.x[0].blogId
+    console.log('POST data : ', form.value);
+    this._api.postTypeRequest('user/addPost', form.value).subscribe(
       (res: any) => {
         if (res.status) {
           console.log(res);
           this._auth.setDataInLocalStorage(
-            'categoryData',
+            'postData',
             JSON.stringify(res.data)
           );
-          this._router.navigate(['categories']);
+          this._router.navigate(['posts']);
         } else {
           console.log(res);
           alert(res.msg);
@@ -78,4 +79,6 @@ export class NewPostComponent implements OnInit {
       }
     );
   }
+
+
 }

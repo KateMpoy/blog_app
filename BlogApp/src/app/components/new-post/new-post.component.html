@@ -19,11 +19,12 @@
           cols="40"
           name="body"
           placeholder="body"
+          ngModel
         ></textarea>
       </div>
       <div class="form-group">
         <ng-multiselect-dropdown
-          name="ProductId"
+          name="selected"
           [settings]="dropdownSettings"
           [placeholder]="'Select Category'"
           [data]="dropdownList"

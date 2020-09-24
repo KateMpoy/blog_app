@@ -21,6 +21,12 @@ export class AuthService {
       ? JSON.parse(localStorage.getItem('categoryData'))
       : null;
   }
+
+  getPostDetails() {
+    return localStorage.getItem('PostData')
+      ? JSON.parse(localStorage.getItem('PostData'))
+      : null;
+  }
   setDataInLocalStorage(variableName, data) {
     localStorage.setItem(variableName, data);
   }

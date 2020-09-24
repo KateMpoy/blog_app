@@ -31,7 +31,7 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let x = this._auth.getUserDetails();
+    let x = this._auth.getBlogDetails();
 
     this._api.postTypeRequest('user/getPosts', x[0]).subscribe(
       (res: any) => {
