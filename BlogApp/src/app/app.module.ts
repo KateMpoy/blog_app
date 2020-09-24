@@ -17,9 +17,10 @@ import { NewCategoryComponent } from './components/new-category/new-category.com
 import { PostsComponent } from './components/posts/posts.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { PostViewComponent } from './components/post-view/post-view.component';
 
 @NgModule({
-  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent, NewCategoryComponent, PostsComponent, NewPostComponent],
+  declarations: [AppComponent, SigninComponent, SignupComponent, UserComponent, CategoriesComponent, NewCategoryComponent, PostsComponent, NewPostComponent, PostViewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

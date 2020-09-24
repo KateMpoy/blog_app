@@ -196,7 +196,7 @@ router.post("/getPosts", async function (req, res, next) {
   try {
     let { email, blogId, password, username } = req.body;
 
-    const sql = `SELECT * FROM posts WHERE blogId = ? ORDER BY postDate DESC`;
+    const sql = `SELECT  * FROM posts WHERE blogId = ? ORDER BY postDate DESC limit 10`;
     con.query(sql, [blogId], function (err, result, fields) {
       if (err) {
         res.send({ status: 0, data: err });

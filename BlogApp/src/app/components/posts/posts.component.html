@@ -23,6 +23,7 @@
     [rowData]="rowData"
     [rowSelection]="'single'"
     [columnDefs]="columnDefs"
+    (cellDoubleClicked) = "onCellDoubleClicked($event)"
   >
   </ag-grid-angular>
   

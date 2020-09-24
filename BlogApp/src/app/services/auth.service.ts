@@ -22,6 +22,12 @@ export class AuthService {
       : null;
   }
 
+  getPostViewDetails() {
+    return localStorage.getItem('postViewData')
+      ? JSON.parse(localStorage.getItem('postViewData'))
+      : null;
+  }
+
   getPostDetails() {
     return localStorage.getItem('PostData')
       ? JSON.parse(localStorage.getItem('PostData'))

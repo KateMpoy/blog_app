@@ -99,4 +99,13 @@ export class PostsComponent implements OnInit {
     );
   }
 
+  onCellDoubleClicked(event: any){
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map((node) => node.data);
+    this._auth.setDataInLocalStorage(
+      'postViewData',
+      JSON.stringify(selectedData)
+    );
+    this._router.navigate(['postView']);
+  }
 }
