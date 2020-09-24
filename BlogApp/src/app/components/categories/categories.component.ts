@@ -33,10 +33,7 @@ export class CategoriesComponent implements OnInit {
 
     this._api.postTypeRequest('user/getCategories', x[0]).subscribe(
       (res: any) => {
-        if (res.status) {
-          console.log(res);
-          this.rowData = res.data;
-        }
+        res.status && (this.rowData = res.data);
       },
       (err) => {
         this.errorMessage = err['error'].message;
@@ -50,7 +47,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   profile() {
-    
     this._router.navigate(['profile']);
   }
 
@@ -70,7 +66,7 @@ export class CategoriesComponent implements OnInit {
       (res: any) => {
         if (res.status) {
           console.log(res);
-          this.ngOnInit()
+          this.ngOnInit();
         }
       },
       (err) => {
@@ -88,7 +84,7 @@ export class CategoriesComponent implements OnInit {
       (res: any) => {
         if (res.status) {
           console.log(res);
-          this.ngOnInit()
+          this.ngOnInit();
         }
       },
       (err) => {

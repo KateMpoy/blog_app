@@ -12,40 +12,40 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./new-post.component.css'],
 })
 export class NewPostComponent implements OnInit {
-
   dropdownList = [];
   selectedItems = [];
 
-  dropdownSettings:IDropdownSettings ={
+  dropdownSettings: IDropdownSettings = {
     singleSelection: false,
-    idField: 'item_id',
-    textField: 'item_text',
+    idField: 'categoryid',
+    textField: 'categoryName',
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
     itemsShowLimit: 3,
- };
+  };
   isLogin: boolean = false;
   errorMessage;
   x;
+  y;
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
     private _router: Router
   ) {}
 
-
   ngOnInit(): void {
     this.x = this._auth.getBlogDetails();
+    this.y = this._auth.getUserDetails();
     console.log(this.x);
 
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
-
+    this._api.postTypeRequest('user/getCategories', this.y[0]).subscribe(
+      (res: any) => {
+        res.status && (this.dropdownList = res.data);
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
   }
 
   onItemSelect(item: any) {
