@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
   blogName: string;
   rowData;
   errorMessage;
+  searchText;
 
   columnDefs = [
     { headerName: 'ID', field: 'postId' },
@@ -67,6 +68,25 @@ export class UserComponent implements OnInit {
 
   viewPosts() {
     this._router.navigate(['posts']);
+  }
+
+  search() {
+
+    let x = this._auth.getBlogDetails();
+    x[0].searchText = this.searchText
+    console.log( this.searchText)
+    this._api.postTypeRequest('user/search', x[0]).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this.rowData = res.data;
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
+    
   }
 
 }

@@ -310,4 +310,23 @@ router.post("/getCategories2", async function (req, res, next) {
     res.send({ status: 0, error: error });
   }
 });
+
+router.post("/search", async function (req, res, next) {
+  try {
+    let { email, blogId, password, searchText } = req.body;
+
+    const sql = `SELECT * FROM posts WHERE title LIKE '%${searchText}%'`;
+    con.query(sql, [searchText], function (err, result, fields) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
 module.exports = router;
