@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   constructor() {}
+  
   getUserDetails() {
     return localStorage.getItem('userData')
       ? JSON.parse(localStorage.getItem('userData'))

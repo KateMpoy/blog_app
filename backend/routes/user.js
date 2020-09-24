@@ -212,7 +212,6 @@ router.post("/getPosts", async function (req, res, next) {
 
 router.post("/addPost", async function (req, res, next) {
   try {
-
     let { body, title, selected, postDate, blogId } = req.body;
     console.log(selected);
     const sql = `Insert Into posts (title, body, postDate, blogId) VALUES ( ?, ?, ?, ?)`;
@@ -234,7 +233,7 @@ router.post("/addPost", async function (req, res, next) {
             if (err) {
               res.send({ status: 0, data: err });
             } else {
-              console.log('success')
+              console.log("success");
             }
           });
         });
@@ -266,14 +265,43 @@ router.post("/savePost", async function (req, res, next) {
   try {
     let { title, body, categoryName, postId } = req.body;
     const sql = `UPDATE posts SET title = ? , body = ? WHERE postId = ?`;
-    con.query(sql, [title, body, postId], function (
-      err,
-      result,
-      fields
-    ) {
+    con.query(sql, [title, body, postId], function (err, result, fields) {
       if (err) {
         res.send({ status: 0, data: err });
       } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/getCategoriesofPost", async function (req, res, next) {
+  try {
+    let { email, postId, password, username } = req.body;
+
+    const sql = `SELECT  categoryId FROM posts_categories WHERE postId = ?`;
+    con.query(sql, [postId], function (err, result, fields) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/getCategories2", async function (req, res, next) {
+  try {
+    let { email, categoryId, password, username } = req.body;
+    const sql = `SELECT * FROM categories WHERE categoryId = ?`;
+    con.query(sql, [categoryId], function (err, result, fields) {
+      if (result.length) {
         let token = jwt.sign({ data: result }, "secret");
         res.send({ status: 1, data: result, token: token });
       }

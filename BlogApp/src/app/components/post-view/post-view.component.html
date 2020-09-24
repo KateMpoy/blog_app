@@ -1,1 +1,7 @@
-<p>post-view works!</p>
+<div class='box'>
+  <h1>{{ title }}</h1>
+  <p>{{date}}</p>
+  <p>{{ body }}</p>
+  <div style="display: flex;">Categories: <p class="categories" *ngFor="let category of rowData">{{category.categoryName}}</p></div>
+  
+</div>
