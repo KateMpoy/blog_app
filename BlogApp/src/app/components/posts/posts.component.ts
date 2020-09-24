@@ -56,7 +56,7 @@ export class PostsComponent implements OnInit {
     this._router.navigate(['profile']);
   }
 
-  NewCategory() {
+  NewPost() {
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;
       this._router.navigate(['newPost']);
@@ -68,7 +68,7 @@ export class PostsComponent implements OnInit {
     const selectedData = selectedNodes.map((node) => node.data);
     console.log(selectedData);
 
-    this._api.postTypeRequest('user/deleteCategory', selectedData[0]).subscribe(
+    this._api.postTypeRequest('user/deletePost', selectedData[0]).subscribe(
       (res: any) => {
         if (res.status) {
           console.log(res);
@@ -86,7 +86,7 @@ export class PostsComponent implements OnInit {
     const selectedData = selectedNodes.map((node) => node.data);
     console.log(selectedData);
 
-    this._api.postTypeRequest('user/saveCategory', selectedData[0]).subscribe(
+    this._api.postTypeRequest('user/savePost', selectedData[0]).subscribe(
       (res: any) => {
         if (res.status) {
           console.log(res);

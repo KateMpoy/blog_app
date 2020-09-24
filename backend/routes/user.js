@@ -212,7 +212,7 @@ router.post("/getPosts", async function (req, res, next) {
 
 router.post("/addPost", async function (req, res, next) {
   try {
-    
+
     let { body, title, selected, blogId } = req.body;
     console.log(selected);
     const sql = `Insert Into posts (title, body, blogId) VALUES ( ?, ?, ?)`;
@@ -245,4 +245,41 @@ router.post("/addPost", async function (req, res, next) {
   }
 });
 
+router.post("/deletePost", async function (req, res, next) {
+  try {
+    let { blogId, catDescription, categoryName, postId } = req.body;
+    const sql = `DELETE FROM posts WHERE postId = ?`;
+    con.query(sql, [postId], function (err, result, fields) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post("/savePost", async function (req, res, next) {
+  try {
+    let { title, body, categoryName, postId } = req.body;
+    const sql = `UPDATE posts SET title = ? , body = ? WHERE postId = ?`;
+    con.query(sql, [title, body, postId], function (
+      err,
+      result,
+      fields
+    ) {
+      if (err) {
+        res.send({ status: 0, data: err });
+      } else {
+        let token = jwt.sign({ data: result }, "secret");
+        res.send({ status: 1, data: result, token: token });
+      }
+    });
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
 module.exports = router;
