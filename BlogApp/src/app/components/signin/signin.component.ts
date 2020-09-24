@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
     console.log('Your form data : ', form.value);
     this._api.postTypeRequest('user/login', form.value).subscribe(
       (res: any) => {
-        if (res.status) {
+        if (res.data.length !== 0) {
           console.log(res);
           this.x = res.data
           this._auth.setDataInLocalStorage(
@@ -34,7 +34,9 @@ export class SigninComponent implements OnInit {
           );
           this._auth.setDataInLocalStorage('token', res.token);
           this.getBlog()
+          this._router.navigate(['profile']);
         } else {
+          alert('Invalid Credentials')
         }
       },
       (err) => {
@@ -48,7 +50,7 @@ export class SigninComponent implements OnInit {
     console.log(this._auth.getUserDetails());
     if (this._auth.getUserDetails() != null) {
       this.isLogin = true;
-      this._router.navigate(['profile']);
+     
     }
   }
 

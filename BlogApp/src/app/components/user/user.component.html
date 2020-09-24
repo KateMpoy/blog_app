@@ -9,3 +9,13 @@
     </button>
   </mat-toolbar>
 </p>
+
+<ag-grid-angular
+#agGrid
+style="padding: 4vw; height: 60vh; width: 60vw; margin-left: 18vw"
+class="ag-theme-alpine"
+[rowData]="rowData"
+[rowSelection]="'single'"
+[columnDefs]="columnDefs"
+>
+</ag-grid-angular>

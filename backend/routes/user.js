@@ -196,7 +196,7 @@ router.post("/getPosts", async function (req, res, next) {
   try {
     let { email, blogId, password, username } = req.body;
 
-    const sql = `SELECT * FROM posts WHERE blogId = ?`;
+    const sql = `SELECT * FROM posts WHERE blogId = ? ORDER BY postDate DESC`;
     con.query(sql, [blogId], function (err, result, fields) {
       if (err) {
         res.send({ status: 0, data: err });
@@ -213,10 +213,10 @@ router.post("/getPosts", async function (req, res, next) {
 router.post("/addPost", async function (req, res, next) {
   try {
 
-    let { body, title, selected, blogId } = req.body;
+    let { body, title, selected, postDate, blogId } = req.body;
     console.log(selected);
-    const sql = `Insert Into posts (title, body, blogId) VALUES ( ?, ?, ?)`;
-    con.query(sql, [title, body, blogId], (err, result, fields) => {
+    const sql = `Insert Into posts (title, body, postDate, blogId) VALUES ( ?, ?, ?, ?)`;
+    con.query(sql, [title, body, postDate, blogId], (err, result, fields) => {
       if (err) {
         res.send({ status: 0, data: err });
       } else {

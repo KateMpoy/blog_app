@@ -13,6 +13,17 @@ import { AuthService } from './../../services/auth.service';
 export class UserComponent implements OnInit {
   isLogin: boolean = false;
   blogName: string;
+  rowData;
+  errorMessage;
+
+  columnDefs = [
+    { headerName: 'ID', field: 'postId' },
+    { headerName: 'Title', field: 'title', editable: true },
+    { headerName: 'Description', field: 'body', editable: true },
+    { headerName: 'Category', field: 'categoryId', editable: true },
+    { checkboxSelection: true },
+  ];
+
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -23,6 +34,19 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.isUserLogin();
+    let x = this._auth.getBlogDetails();
+
+    this._api.postTypeRequest('user/getPosts', x[0]).subscribe(
+      (res: any) => {
+        if (res.status) {
+          console.log(res);
+          this.rowData = res.data;
+        }
+      },
+      (err) => {
+        this.errorMessage = err['error'].message;
+      }
+    );
   }
 
   isUserLogin() {

@@ -21,7 +21,7 @@ export class PostsComponent implements OnInit {
     { headerName: 'ID', field: 'postId' },
     { headerName: 'Title', field: 'title', editable: true },
     { headerName: 'Description', field: 'body', editable: true },
-    { headerName: 'Category', field: 'categoryId', editable: true },
+    { headerName: 'Date', field: 'postDate', editable: true },
     { checkboxSelection: true },
   ];
   constructor(
