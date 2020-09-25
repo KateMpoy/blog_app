@@ -34,9 +34,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isUserLogin();
+    this.isUserLogin()
     let x = this._auth.getBlogDetails();
-
+    
     this._api.postTypeRequest('user/getPosts', x[0]).subscribe(
       (res: any) => {
         if (res.status) {
